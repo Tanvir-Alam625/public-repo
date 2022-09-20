@@ -1,9 +1,9 @@
 import React from "react"
-const Repo =()=>{
+const Repo =({repo})=>{
     return(
         <div className="repo">
-            <h2>Repo name</h2>
-            <p>application as I believe that it would be a great opportunity for me further grow both</p>
+            <h2>{repo.full_name}</h2>
+            <p>{repo.description}</p>
             <div className="skills-topic">
                 <span>JavaScript</span>
                 <span>NodeJS</span>
