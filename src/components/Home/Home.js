@@ -12,22 +12,32 @@ const Home =()=>{
     const [accountLoading,setAccountLoading]=useState(true)
     const [reposLoading,setReposLoading]=useState(true)
     useEffect( ()=>{
-        // reposLoading(true)
         const getGithubRepoApi= async()=>{
-            const res =await fetch(`https://api.github.com/users/johnpapa/repos?page=${numberOfSelectPage}&per_page=10`);
-            const data = await res.json()
-            const dataLimit = await res.headers.get('x-ratelimit-limit');
-            setPageCount(Math.ceil(dataLimit/10))
-            setRepoData(data)
-            setReposLoading(false)
+            try{
+                setReposLoading(true)
+                const res =await fetch(`https://api.github.com/users/Tanvir-Alam625/repos?page=${numberOfSelectPage}&per_page=10`);
+                const data = await res.json()
+                const dataLimit = await res.headers.get('x-ratelimit-limit');
+                setPageCount(Math.ceil(dataLimit/10))
+                setRepoData(data)
+                setReposLoading(false)
+            }catch(error){
+                console.log(error);
+            }
         }
         getGithubRepoApi()
 
     },[numberOfSelectPage])
+    //  get account  function 
     const getAccountData = async()=>{
-        const {data} = await axios.get('https://api.github.com/users/johnpapa');
-        await setAccountData(data);
-        await setAccountLoading(false);
+        try{
+            const {data} = await axios.get('https://api.github.com/users/Tanvir-Alam625');
+            await setAccountData(data);
+            await setAccountLoading(false);
+        }
+        catch(error){
+            console.log(error);
+        }
     }
     getAccountData()
     // pagination function 
@@ -35,7 +45,7 @@ const Home =()=>{
         setNumberOfSelectPage(data.selected +1)
     }
 
-    if(accountLoading|| reposLoading){
+    if(accountLoading){
         return <p>Loading...</p>
     }
   
@@ -60,13 +70,16 @@ const Home =()=>{
                     </svg>
                     <span>{accountData?.location}</span>
                     </p>
-                    <p>Twitter:https://twitter.com/{accountData?.twitter_username}</p>
+                    <p>Twitter: https://twitter.com/{accountData?.twitter_username}</p>
                 </div>
                 
             </div>
             <div className="repo-container">
                 {
-                    repodata?.map(repo => <Repo key={repo.id} repo={repo}/>)
+                    (accountLoading|| reposLoading) && <p>Loading...</p>
+                }
+                {
+                     !reposLoading && repodata?.map(repo => <Repo key={repo.id} repo={repo}/>)
                 }
             </div>
 
@@ -78,6 +91,7 @@ const Home =()=>{
                 pageCount={pageCount}
                 pageRangeDisplayed={2}
                 marginPagesDisplayed={2}
+                selected={numberOfSelectPage}
                 breakLabel={'****'}
                 onPageChange={handlePageClick}
                 containerClassName={"pagination"}
