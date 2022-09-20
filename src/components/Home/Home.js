@@ -1,15 +1,29 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./Home.css"
 import AccountImage from "../../img/RR.K.74.TANVIR (1)........jpg"
 import Repo from "./Repo";
 import ReactPaginate from "react-paginate";
+import axios from "axios";
 const Home =()=>{
+    const [pageCount,setPageCount]=useState(0);
+    const [data,setData]=useState(null);
+    const [numberOfSelectPage,setNumberOfSelectPage]=useState(1)
+    useEffect( ()=>{
+        const getGithubRepoApi= async()=>{
+            const res =await fetch(`https://api.github.com/users/johnpapa/repos?page=${numberOfSelectPage}&per_page=10`);
+            const repoData = await res.json()
+            const dataLimit = await res.headers.get('x-ratelimit-limit');
+            setPageCount(Math.ceil(dataLimit/10))
+            setData(repoData)
+            console.log(repoData);
+        }
+        getGithubRepoApi()
+
+    },[numberOfSelectPage])
+    // pagination function 
     const handlePageClick=(data)=>{
-        console.log(data.selected);
+        setNumberOfSelectPage(data.selected +1)
     }
-    const leftArrowIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-  </svg>
   
     return(
         <main className="home-container">
@@ -37,10 +51,9 @@ const Home =()=>{
                 
             </div>
             <div className="repo-container">
-                    <Repo />
-                    <Repo />
-                    <Repo />
-
+                {
+                    data?.map(repo => <Repo repo={repo}/>)
+                }
             </div>
 
             {/* pagination code  */}
@@ -48,7 +61,7 @@ const Home =()=>{
                 <ReactPaginate
                 previousLabel={`<<`}
                 nextLabel={`>>`}
-                pageCount={20}
+                pageCount={pageCount}
                 pageRangeDisplayed={2}
                 marginPagesDisplayed={2}
                 breakLabel={'****'}
@@ -64,7 +77,6 @@ const Home =()=>{
                 breakLinkClassName={'page-link'}
                 activeClassName={'active'}
                 />
-
             </div>
         </main>
 
