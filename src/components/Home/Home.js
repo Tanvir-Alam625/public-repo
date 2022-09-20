@@ -2,7 +2,15 @@ import React from "react"
 import "./Home.css"
 import AccountImage from "../../img/RR.K.74.TANVIR (1)........jpg"
 import Repo from "./Repo";
+import ReactPaginate from "react-paginate";
 const Home =()=>{
+    const handlePageClick=(data)=>{
+        console.log(data.selected);
+    }
+    const leftArrowIcon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+  </svg>
+  
     return(
         <main className="home-container">
             <div className="home-heading">
@@ -33,7 +41,31 @@ const Home =()=>{
                     <Repo />
                     <Repo />
 
-                </div>
+            </div>
+
+            {/* pagination code  */}
+            <div className="pagination-bar">
+                <ReactPaginate
+                previousLabel={`<<`}
+                nextLabel={`>>`}
+                pageCount={20}
+                pageRangeDisplayed={2}
+                marginPagesDisplayed={2}
+                breakLabel={'****'}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                nextClassName={'page-item'}
+                nextLinkClassName={'page-link'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                activeClassName={'active'}
+                />
+
+            </div>
         </main>
 
     );
