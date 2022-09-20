@@ -1,0 +1,58 @@
+.home-container{
+    padding-top: 60px;
+}
+
+.home-container{
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 10px auto;
+}
+.home-heading{
+    display: flex;
+    
+}
+.img-conatiner{
+    
+    padding: 2px;
+    width: 40%;
+    text-align: center;
+}
+.account-img{
+    border: 3px solid gray;
+    padding: 5px;
+    height: 300px ;
+    width: 300px ;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.account-info{
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 60%;
+}
+.account-info h2{
+margin: 10px 0;
+font-weight: 400;
+
+}
+.account-info .desc{
+    margin-bottom: 10px;
+}
+.location,
+.gitHub-link{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.gitHub-link{
+    margin-top: 20px;
+}
+.icon,
+.link-icon{
+    height:22px;
+    width: 22px;
+    margin-right: 5px;
+}
+.link-icon{
+    transform: rotate(43deg);
+}
