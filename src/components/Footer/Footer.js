@@ -3,9 +3,9 @@ const Footer=()=>{
     const year = new Date().getFullYear()
     return(
         <footer
-        style={{display:'flex', justifyContent:'center', borderTop:'1px solid #000',marginTop:'10px'}}
+        style={{display:'flex', justifyContent:'center', borderTop:'1px solid gray',marginTop:'10px', padding:'30px 0px'}}
         >
-            <p>Copyright ©{year} All rights reserved</p>
+            <p >Copyright ©{year} All rights reserved</p>
         </footer>
     );
 }

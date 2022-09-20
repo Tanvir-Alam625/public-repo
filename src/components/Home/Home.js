@@ -1,6 +1,7 @@
 import React from "react"
 import "./Home.css"
 import AccountImage from "../../img/RR.K.74.TANVIR (1)........jpg"
+import Repo from "./Repo";
 const Home =()=>{
     return(
         <main className="home-container">
@@ -25,7 +26,14 @@ const Home =()=>{
                     </p>
                     <p>Twitter:</p>
                 </div>
+                
             </div>
+            <div className="repo-container">
+                    <Repo />
+                    <Repo />
+                    <Repo />
+
+                </div>
         </main>
 
     );
