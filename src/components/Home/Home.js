@@ -5,13 +5,15 @@ import Repo from "./Repo";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import Spinner from "../Spinner/Spinner";
+import RepoSpinner from "./RepoSpinner/RepoSpinner";
 const Home =()=>{
     const [pageCount,setPageCount]=useState(0);
     const [repodata,setRepoData]=useState(null);
-    const [numberOfSelectPage,setNumberOfSelectPage]=useState(1)
-    const [accountData,setAccountData]=useState({})
-    const [accountLoading,setAccountLoading]=useState(true)
-    const [reposLoading,setReposLoading]=useState(true)
+    const [numberOfSelectPage,setNumberOfSelectPage]=useState(1);
+    const [accountData,setAccountData]=useState({});
+    const [accountLoading,setAccountLoading]=useState(true);
+    const [reposLoading,setReposLoading]=useState(true);
+    //  load the repo data 
     useEffect( ()=>{
         const getGithubRepoApi= async()=>{
             try{
@@ -75,10 +77,11 @@ const Home =()=>{
                 </div>
                 
             </div>
+            {
+                (accountLoading || reposLoading) && <RepoSpinner />
+            }
             <div className="repo-container">
-                {
-                    (accountLoading|| reposLoading) && <p>Loading...</p>
-                }
+                
                 {
                      !reposLoading && repodata?.map(repo => <Repo key={repo.id} repo={repo}/>)
                 }
