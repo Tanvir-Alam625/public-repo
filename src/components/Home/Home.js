@@ -4,6 +4,7 @@ import AccountImage from "../../img/RR.K.74.TANVIR (1)........jpg"
 import Repo from "./Repo";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
+import Spinner from "../Spinner/Spinner";
 const Home =()=>{
     const [pageCount,setPageCount]=useState(0);
     const [repodata,setRepoData]=useState(null);
@@ -46,7 +47,7 @@ const Home =()=>{
     }
 
     if(accountLoading){
-        return <p>Loading...</p>
+        return <Spinner />
     }
   
     return(
@@ -91,7 +92,6 @@ const Home =()=>{
                 pageCount={pageCount}
                 pageRangeDisplayed={2}
                 marginPagesDisplayed={2}
-                selected={numberOfSelectPage}
                 breakLabel={'****'}
                 onPageChange={handlePageClick}
                 containerClassName={"pagination"}
@@ -105,6 +105,7 @@ const Home =()=>{
                 breakLinkClassName={'page-link'}
                 activeClassName={'active'}
                 />
+                
             </div>
         </main>
 

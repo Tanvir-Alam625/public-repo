@@ -1,14 +1,19 @@
 import React from "react"
 const Repo =({repo})=>{
+    const {full_name,description,language}=repo;
+   console.log(repo);
     return(
         <div className="repo">
-            <h2>{repo.full_name}</h2>
-            <p>{repo.description}</p>
-            <div className="skills-topic">
-                <span>JavaScript</span>
-                <span>NodeJS</span>
-                <span>ReactJS</span>
-            </div>
+            <h2>{full_name.split('/')[1]}</h2>
+            <p>{description}</p>
+            {
+                language && 
+                <div className="skills-topic">
+                    <span>{language}</span>
+                    <span>{language}</span>
+                    <span>{language}</span>
+                </div>
+            }
         </div>
     );
 
