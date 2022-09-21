@@ -1,7 +1,6 @@
 import React from "react"
 const Repo =({repo})=>{
     const {full_name,description,language}=repo;
-   console.log(repo);
     return(
         <div className="repo">
             <h2>{full_name.split('/')[1]}</h2>

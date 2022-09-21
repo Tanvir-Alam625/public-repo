@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import "./Home.css"
-import AccountImage from "../../img/RR.K.74.TANVIR (1)........jpg"
 import Repo from "./Repo";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
@@ -18,7 +17,7 @@ const Home =()=>{
         const getGithubRepoApi= async()=>{
             try{
                 setReposLoading(true)
-                const res =await fetch(`https://api.github.com/users/Tanvir-Alam625/repos?page=${numberOfSelectPage}&per_page=10`);
+                const res =await fetch(`https://api.github.com/users/johnpapa/repos?page=${numberOfSelectPage}&per_page=10`);
                 const data = await res.json()
                 const dataLimit = await res.headers.get('x-ratelimit-limit');
                 setPageCount(Math.ceil(dataLimit/10))
@@ -28,13 +27,12 @@ const Home =()=>{
                 console.log(error);
             }
         }
-        getGithubRepoApi()
-
+        getGithubRepoApi();
     },[numberOfSelectPage])
     //  get account  function 
     const getAccountData = async()=>{
         try{
-            const {data} = await axios.get('https://api.github.com/users/Tanvir-Alam625');
+            const {data} = await axios.get('https://api.github.com/users/johnpapa');
             await setAccountData(data);
             await setAccountLoading(false);
         }
@@ -58,7 +56,9 @@ const Home =()=>{
                 <div className="img-conatiner">
                     <img src={accountData?.avatar_url} alt='img' className="account-img"/>
                     <p className="gitHub-link">
+                    <a href={`https://twitter.com/${accountData?.twitter_username}`} target='_blank'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" className="link-icon" height="24" viewBox="0 0 24 24" style={{fill: 'rgba(0, 0, 0, 1)',transform: 'msFilter'}}><path d="M4.222 19.778a4.983 4.983 0 0 0 3.535 1.462 4.986 4.986 0 0 0 3.536-1.462l2.828-2.829-1.414-1.414-2.828 2.829a3.007 3.007 0 0 1-4.243 0 3.005 3.005 0 0 1 0-4.243l2.829-2.828-1.414-1.414-2.829 2.828a5.006 5.006 0 0 0 0 7.071zm15.556-8.485a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0L9.879 7.051l1.414 1.414 2.828-2.829a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.829 2.828 1.414 1.414 2.829-2.828z"></path><path d="m8.464 16.95-1.415-1.414 8.487-8.486 1.414 1.415z"></path></svg>
+                    </a>
                     <span>{accountData?.html_url}</span>
                     </p>
                 </div>
@@ -80,6 +80,7 @@ const Home =()=>{
             {
                 (accountLoading || reposLoading) && <RepoSpinner />
             }
+
             <div className="repo-container">
                 
                 {

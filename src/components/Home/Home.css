@@ -54,6 +54,11 @@ font-weight: 600;
 }
 .link-icon{
     transform: rotate(43deg);
+    color: black;
+    transition: .3s;
+}
+.link-icon:hover{
+    color: #428BCA;
 }
 
 /* repo style  */

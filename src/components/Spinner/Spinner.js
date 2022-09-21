@@ -12,11 +12,12 @@ const Spinner = ()=>{
             width:'100vw',
             display:'flex',
             justifyContent:'center',
-            alignItems:'center'
+            alignItems:'center',
+            overflow:'hidden'
     }
     return(
         <div style={spinnerStyles}>
-            <img src={SpinnerImage} alt="spinner-img" style={{height:'100vh', width:'90vw' }}/>
+            <img src={SpinnerImage} alt="spinner-img" style={{height:'100vh', width:'90vw', objectFit:'cover',textAlign:'center' }}/>
         </div>
     );
 }
