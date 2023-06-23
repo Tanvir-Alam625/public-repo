@@ -1,0 +1,31 @@
+.skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: skeleton-animation 1s ease-in-out infinite;
+}
+
+.skeleton-text {
+  height: 1em;
+  width: 50%;
+  margin-bottom: 0.5em;
+}
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+.skeleton-rectangle {
+  height: 100%;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
